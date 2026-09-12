@@ -3,6 +3,18 @@
 
 """Train models with flexible insertion of algorithms."""
 
-from composer.trainer.trainer import Trainer
+import importlib
+from typing import TYPE_CHECKING
 
-__all__ = ['Trainer']
+if TYPE_CHECKING:
+    from composer.trainer.trainer import Trainer  # type: ignore
+
+
+def __getattr__(name: str):
+    if name == "Trainer":
+        module = importlib.import_module("composer.trainer.trainer")
+        return getattr(module, "Trainer")
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+
+__all__ = ["Trainer"]

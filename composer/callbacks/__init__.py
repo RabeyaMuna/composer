@@ -6,10 +6,15 @@
 Each callback inherits from the :class:`.Callback` base class. See detailed description and
 examples for writing your own callbacks at the :class:`.Callback` base class.
 """
+
 from composer.callbacks.activation_monitor import ActivationMonitor
 from composer.callbacks.checkpoint_saver import CheckpointSaver
 from composer.callbacks.early_stopper import EarlyStopper
-from composer.callbacks.eval_output_logging_callback import EvalOutputLogging
+
+# EvalOutputLogging is intentionally not imported at package import time because the
+# module may import heavy optional dependencies (e.g., transformers). Import the
+# class directly from composer.callbacks.eval_output_logging_callback where needed.
+EvalOutputLogging = None
 from composer.callbacks.export_for_inference import ExportForInferenceCallback
 from composer.callbacks.free_outputs import FreeOutputs
 from composer.callbacks.generate import Generate
@@ -26,22 +31,22 @@ from composer.callbacks.system_metrics_monitor import SystemMetricsMonitor
 from composer.callbacks.threshold_stopper import ThresholdStopper
 
 __all__ = [
-    'ActivationMonitor',
-    'OptimizerMonitor',
-    'LRMonitor',
-    'MemoryMonitor',
-    'NaNMonitor',
-    'SpeedMonitor',
-    'CheckpointSaver',
-    'MLPerfCallback',
-    'EarlyStopper',
-    'EvalOutputLogging',
-    'ExportForInferenceCallback',
-    'ThresholdStopper',
-    'ImageVisualizer',
-    'HealthChecker',
-    'RuntimeEstimator',
-    'SystemMetricsMonitor',
-    'Generate',
-    'FreeOutputs',
+    "ActivationMonitor",
+    "OptimizerMonitor",
+    "LRMonitor",
+    "MemoryMonitor",
+    "NaNMonitor",
+    "SpeedMonitor",
+    "CheckpointSaver",
+    "MLPerfCallback",
+    "EarlyStopper",
+    "EvalOutputLogging",
+    "ExportForInferenceCallback",
+    "ThresholdStopper",
+    "ImageVisualizer",
+    "HealthChecker",
+    "RuntimeEstimator",
+    "SystemMetricsMonitor",
+    "Generate",
+    "FreeOutputs",
 ]
